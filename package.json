@@ -4,7 +4,9 @@
   "description": "A merge driver for shrinkwrap.yaml",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "bin": "lib/cli.js",
+  "bin": {
+    "pnpm-merge-driver": "lib/cli.js"
+  },
   "files": [
     "lib"
   ],
@@ -34,11 +36,10 @@
     "url": "https://github.com/pnpm/merge-driver/issues"
   },
   "homepage": "https://github.com/pnpm/merge-driver#readme",
-  "peerDependencies": {
-    "@pnpm/logger": "^1.0.0"
-  },
   "dependencies": {
+    "@pnpm/logger": "^1.0.1",
     "@types/ramda": "^0.25.21",
+    "load-yaml-file": "^0.1.0",
     "pnpm-shrinkwrap": "^6.2.4",
     "ramda": "^0.25.0"
   },

@@ -9,7 +9,16 @@
 ## Installation
 
 ```sh
-npm i -S @pnpm/logger @pnpm/merge-driver
+npm i -S @pnpm/merge-driver
+```
+
+## Usage
+
+To configure it on a repo, run:
+
+```sh
+pnpm i -g @pnpm/merge-driver
+pnpx npm-merge-driver install --driver-name pnpm-merge-driver --driver "pnpm-merge-driver %A %O %B %P" --files shrinkwrap.yaml
 ```
 
 ## License

@@ -1,27 +1,13 @@
 #!/usr/bin/env node
-// import mergeShrinkwrapFiles from '.'
+import loadYamlFile = require('load-yaml-file')
+import {writeWantedOnly} from 'pnpm-shrinkwrap'
+import mergeShrinkwrap from '.'
 
-// console.log('MERGING shrinkwrap.yaml')
+const mergedShrinkwrap = mergeShrinkwrap({
+  base: loadYamlFile.sync(process.argv[3]),
+  ours: loadYamlFile.sync(process.argv[2]),
+  theirs: loadYamlFile.sync(process.argv[4]),
+})
 
-// mergeShrinkwrapFiles({
-//   oursFileName: process.argv[2],
-//   baseFileName: process.argv[3],
-//   theirsFileName: process.argv[4],
-// })
-
-// import loadYamlFile from 'load-yaml-file'
-// import {Shrinkwrap} from 'pnpm-shrinkwrap'
-// import R = require('ramda')
-
-// export default (
-//   opts: {
-//     oursFileName: string,
-//     baseFileName: string,
-//     theirsFileName: string,
-//   },
-// ) => {
-//   const oursShrinkwrap = loadYamlFile.sync(opts.oursFileName)
-//   const theirsShrinkwrap = loadYamlFile.sync(opts.theirsFileName)
-//   const newOursShrinkwrap = mergeShrinkwrap(oursShrinkwrap, theirsShrinkwrap)
-//   writeYamlFile.sync(opts.oursFileName, newOursShrinkwrap)
-// }
+writeWantedOnly(process.cwd(), mergedShrinkwrap)
+  .catch((err: Error) => console.error(err))
