@@ -1,5 +1,5 @@
 dependencies:
-  '@pnpm/logger': 1.0.2
+  '@pnpm/logger': 2.1.0
   '@types/ramda': 0.26.0
   load-yaml-file: 0.1.0
   pnpm-shrinkwrap: 6.5.1
@@ -27,16 +27,16 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-1zLmh6tRftQXfZ1IFHq1IexP0KaJhN6pSCA/IzK+Vixn4hPvxwcIbGjKW0KH9hsHSmrPpmSit2EWj7jGNgfa6Q==
-  /@pnpm/logger/1.0.2:
+  /@pnpm/logger/2.1.0:
     dependencies:
       '@types/node': 10.12.2
       bole: 3.0.2
       ndjson: 1.5.0
     dev: false
     engines:
-      node: '>=4'
+      node: '>=6'
     resolution:
-      integrity: sha512-A8XbJKvdueazvJGPn1qQ9LL6uopV88ebIT+dJKNQ68gT7yfCbtfT8j5ZzdVczmGbkiuBeZ1VckZerkO0tjOXZA==
+      integrity: sha512-BL4Laf6b50LjdcpOUWPukx2XJtb3mo2OpJjHdRNSDJu9YS2tRBeP14H2bNqGjCjfeml8z3KufI3Km6VQemVXNw==
   /@pnpm/resolver-base/1.2.0:
     dependencies:
       '@pnpm/types': 1.8.0
@@ -3150,7 +3150,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
-  '@pnpm/logger': ^1.0.1
+  '@pnpm/logger': ^2.0.0
   '@types/ramda': ^0.26.0
   '@types/tape': ^4.2.31
   load-yaml-file: ^0.1.0
