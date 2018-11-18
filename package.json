@@ -41,7 +41,7 @@
     "@types/ramda": "^0.26.0",
     "load-yaml-file": "^0.1.0",
     "pnpm-shrinkwrap": "^6.2.4",
-    "ramda": "^0.25.0"
+    "ramda": "^0.26.0"
   },
   "devDependencies": {
     "@types/tape": "^4.2.31",
