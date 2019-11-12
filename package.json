@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/pnpm/merge-driver#readme",
   "dependencies": {
-    "@pnpm/logger": "^1.0.1",
+    "@pnpm/logger": "^3.0.0",
     "@types/ramda": "^0.26.0",
     "load-yaml-file": "^0.1.0",
     "pnpm-shrinkwrap": "^6.2.4",
