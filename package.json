@@ -48,7 +48,7 @@
     "mos": "^2.0.0-alpha.3",
     "mos-plugin-readme": "^1.0.4",
     "package-preview": "^3.0.0",
-    "rimraf": "^2.6.2",
+    "rimraf": "^3.0.0",
     "tape": "^4.8.0",
     "ts-node": "^7.0.0",
     "tslint": "^5.8.0",
