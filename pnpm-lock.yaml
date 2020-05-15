@@ -1,7 +1,7 @@
 dependencies:
   '@pnpm/logger': 3.1.0
   '@types/ramda': 0.27.4
-  load-yaml-file: 0.1.1
+  load-yaml-file: 0.2.0
   pnpm-shrinkwrap: 6.5.1_@pnpm+logger@3.1.0
   ramda: 0.27.0
 devDependencies:
@@ -1134,6 +1134,10 @@ packages:
   /graceful-fs/4.2.3:
     resolution:
       integrity: sha512-a30VEBm4PEdx1dRB7MFK7BejejvCvBronbLjht+sHuGYj8PHs7M/5Z+rt5lw551vZ7yfTCj4Vuyy3mSJytDWRQ==
+  /graceful-fs/4.2.4:
+    dev: false
+    resolution:
+      integrity: sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
   /gunzip-maybe/1.4.1:
     dependencies:
       browserify-zlib: 0.1.4
@@ -1593,6 +1597,17 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-G910TofXH7u0NfslAzqv6c9pHpvBzObNOo2hMG0/KUDpdHeFY0wE/fTBMExt0Gb12gg5bXS7Hj6pb0e+xbBXLA==
+  /load-yaml-file/0.2.0:
+    dependencies:
+      graceful-fs: 4.2.4
+      js-yaml: 3.13.1
+      pify: 4.0.1
+      strip-bom: 3.0.0
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==
   /locate-path/2.0.0:
     dependencies:
       p-locate: 2.0.0
@@ -2343,6 +2358,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=
+  /pify/4.0.1:
+    dev: false
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
   /pinkie-promise/2.0.1:
     dependencies:
       pinkie: 2.0.4
@@ -3556,7 +3577,7 @@ specifiers:
   '@pnpm/logger': ^3.0.0
   '@types/ramda': ^0.27.0
   '@types/tape': ^4.2.31
-  load-yaml-file: ^0.1.0
+  load-yaml-file: ^0.2.0
   mos: ^2.0.0-alpha.3
   mos-plugin-readme: ^1.0.4
   package-preview: ^3.0.0
