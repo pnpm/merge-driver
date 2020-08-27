@@ -12,7 +12,7 @@ devDependencies:
   rimraf: 3.0.0
   tape: 5.0.0
   ts-node: 8.5.2_typescript@3.7.2
-  tslint: 5.20.1_typescript@3.7.2
+  tslint: 6.1.3_typescript@3.7.2
   typescript: 3.7.2
 lockfileVersion: 5.1
 packages:
@@ -1775,6 +1775,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
+  /mkdirp/0.5.5:
+    dependencies:
+      minimist: 1.2.5
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
   /mos-core/1.0.2:
     dependencies:
       babel-run-async: 1.0.0
@@ -3252,11 +3259,11 @@ packages:
     dev: false
     resolution:
       integrity: sha512-GrgXML3KOnYymiyFNEohhizPtO+ZgTwEN9oIR+SvP6EPP5cj4qH1Xi5CU4iobgMUNYMEVhXqnBLY1tSonXwE+g==
-  /tslib/1.10.0:
+  /tslib/1.13.0:
     dev: true
     resolution:
-      integrity: sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
-  /tslint/5.20.1_typescript@3.7.2:
+      integrity: sha512-i/6DQjL8Xf3be4K/E6Wgpekn5Qasl1usyw++dAA35Ue5orEn65VIxOA+YvNNl9HV3qv70T7CNwjODHZrLwvd1Q==
+  /tslint/6.1.3_typescript@3.7.2:
     dependencies:
       '@babel/code-frame': 7.5.5
       builtin-modules: 1.1.1
@@ -3266,10 +3273,10 @@ packages:
       glob: 7.1.6
       js-yaml: 3.13.1
       minimatch: 3.0.4
-      mkdirp: 0.5.1
-      resolve: 1.13.0
+      mkdirp: 0.5.5
+      resolve: 1.17.0
       semver: 5.7.1
-      tslib: 1.10.0
+      tslib: 1.13.0
       tsutils: 2.29.0_typescript@3.7.2
       typescript: 3.7.2
     dev: true
@@ -3277,12 +3284,12 @@ packages:
       node: '>=4.8.0'
     hasBin: true
     peerDependencies:
-      typescript: '>=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev'
+      typescript: '>=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >=3.0.0-dev || >= 3.1.0-dev || >= 3.2.0-dev || >= 4.0.0-dev'
     resolution:
-      integrity: sha512-EcMxhzCFt8k+/UP5r8waCf/lzmeSyVlqxqMEDQE7rWYiQky8KpIBz1JAoYXfROHrPZ1XXd43q8yQnULOLiBRQg==
+      integrity: sha512-IbR4nkT96EQOvKE2PW/djGz8iGNeJ4rF2mBfiYaR/nvUWYKJhLwimoJKgjIFEIDibBtOevj7BqCRL4oHeWWUCg==
   /tsutils/2.29.0_typescript@3.7.2:
     dependencies:
-      tslib: 1.10.0
+      tslib: 1.13.0
       typescript: 3.7.2
     dev: true
     peerDependencies:
@@ -3565,5 +3572,5 @@ specifiers:
   rimraf: ^3.0.0
   tape: ^5.0.0
   ts-node: ^8.0.0
-  tslint: ^5.8.0
+  tslint: ^6.0.0
   typescript: ^3.0.0
