@@ -1,40 +1,35 @@
-import {
-  prune,
-  ResolvedDependencies,
-  Shrinkwrap,
-} from 'pnpm-shrinkwrap'
+import { pruneSharedLockfile, Lockfile } from '@pnpm/prune-lockfile'
 import R = require('ramda')
 
-export default function mergeShrinkwrap (
+export default function mergeLockfile (
   opts: {
-    base: Shrinkwrap,
-    ours: Shrinkwrap,
-    theirs: Shrinkwrap,
+    base: Lockfile
+    ours: Lockfile
+    theirs: Lockfile
   },
 ) {
-  const newShr = {
-    specifiers: {},
-  } as Shrinkwrap
-
-  newShr.registry = takeChangedValue(opts.ours.registry, opts.base.registry, opts.theirs.registry, 'registry')
+  const newLockfile: Lockfile = {
+    importers: {},
+    lockfileVersion: Math.max(opts.base.lockfileVersion, opts.ours.lockfileVersion),
+  }
 
   for (const key of ['specifiers', 'dependencies', 'devDependencies', 'optionalDependencies']) {
-    newShr[key] = mergeDict(opts.ours[key], opts.base[key], opts.theirs[key], key)
+    newLockfile[key] = mergeDict(opts.ours[key], opts.base[key], opts.theirs[key], key)
   }
 
   if (R.keys(opts.ours.packages).length >= R.keys(opts.theirs.packages).length) {
-    newShr.packages = {
+    newLockfile.packages = {
       ...opts.ours.packages,
       ...opts.theirs.packages,
     }
   } else {
-    newShr.packages = {
+    newLockfile.packages = {
       ...opts.theirs.packages,
       ...opts.ours.packages,
     }
   }
 
-  return prune(newShr)
+  return pruneSharedLockfile(newLockfile)
 }
 
 interface Dict {[key: string]: string}

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-import loadYamlFile = require('load-yaml-file')
-import {writeWantedOnly} from 'pnpm-shrinkwrap'
-import mergeShrinkwrap from '.'
+import { readWantedLockfile, writeWantedLockfile } from '@pnpm/lockfile-file'
+import mergeLockfile from '.'
 
-const mergedShrinkwrap = mergeShrinkwrap({
-  base: loadYamlFile.sync(process.argv[3]),
-  ours: loadYamlFile.sync(process.argv[2]),
-  theirs: loadYamlFile.sync(process.argv[4]),
-})
+(async () => {
+  const mergedLockfile = mergeLockfile({
+    base: (await readWantedLockfile(process.argv[3], { ignoreIncompatible: true }))!,
+    ours: (await readWantedLockfile(process.argv[2], { ignoreIncompatible: true }))!,
+    theirs: (await readWantedLockfile(process.argv[4], { ignoreIncompatible: true }))!,
+  })
 
-writeWantedOnly(process.cwd(), mergedShrinkwrap)
-  .catch((err: Error) => console.error(err))
+  await writeWantedLockfile(process.cwd(), mergedLockfile)
+})()

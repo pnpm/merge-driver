@@ -1,10 +1,11 @@
 import test = require('tape')
-import mergeShrinkwraps from '@pnpm/merge-driver'
+import mergeLockfile from '@pnpm/merge-driver'
 
-const simpleShr = {
+const simpleLockfile = {
   dependencies: {
     foo: '1.0.0',
   },
+  lockfileVersion: 5.2,
   packages: {
     '/foo/1.0.0': {
       resolution: {
@@ -12,30 +13,17 @@ const simpleShr = {
       },
     },
   },
-  registry: 'https://registry.npmjs.org/',
   specifiers: {
     foo: '1.0.0',
   },
-  shrinkwrapVersion: 3,
 }
-
-test('fails when registry fields differ', t => {
-  t.throws(() => {
-    mergeShrinkwraps({
-      base: simpleShr,
-      ours: {...simpleShr, registry: 'https://registry.node-modules.io/'},
-      theirs: {...simpleShr, registry: 'https://registry.yarnpkg.com/'},
-    })
-  }, /Cannot resolve 'registry'/, 'The registry field has been changed in both our/their')
-  t.end()
-})
 
 test('fails when specifiers differ', t => {
   t.throws(() => {
-    mergeShrinkwraps({
-      base: simpleShr,
-      ours: {...simpleShr, specifiers: {foo: '^1.0.0'}},
-      theirs: {...simpleShr, specifiers: {foo: '^1.1.0'}},
+    mergeLockfile({
+      base: simpleLockfile,
+      ours: {...simpleLockfile, specifiers: {foo: '^1.0.0'}},
+      theirs: {...simpleLockfile, specifiers: {foo: '^1.1.0'}},
     })
   }, /Cannot resolve 'specifiers.foo'/, 'Cannot merge specifiers field')
   t.end()
