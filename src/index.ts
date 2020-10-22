@@ -13,8 +13,18 @@ export default function mergeLockfile (
     lockfileVersion: Math.max(opts.base.lockfileVersion, opts.ours.lockfileVersion),
   }
 
-  for (const key of ['specifiers', 'dependencies', 'devDependencies', 'optionalDependencies']) {
-    newLockfile[key] = mergeDict(opts.ours[key], opts.base[key], opts.theirs[key], key)
+  for (const importerId of Array.from(new Set([...Object.keys(opts.ours.importers), ...Object.keys(opts.theirs.importers)]))) {
+    newLockfile.importers[importerId] = {
+      specifiers: {},
+    }
+    for (const key of ['specifiers', 'dependencies', 'devDependencies', 'optionalDependencies']) {
+      newLockfile.importers[importerId][key] = mergeDict(
+        opts.ours.importers[importerId]?.[key] ?? {},
+        opts.base.importers[importerId]?.[key] ?? {},
+        opts.theirs.importers[importerId]?.[key] ?? {},
+        key
+      )
+    }
   }
 
   if (R.keys(opts.ours.packages).length >= R.keys(opts.theirs.packages).length) {

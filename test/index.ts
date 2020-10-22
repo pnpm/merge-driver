@@ -2,8 +2,15 @@ import test = require('tape')
 import mergeLockfile from '@pnpm/merge-driver'
 
 const simpleLockfile = {
-  dependencies: {
-    foo: '1.0.0',
+  importers: {
+    '.': {
+      dependencies: {
+        foo: '1.0.0',
+      },
+      specifiers: {
+        foo: '1.0.0',
+      },
+    },
   },
   lockfileVersion: 5.2,
   packages: {
@@ -13,17 +20,30 @@ const simpleLockfile = {
       },
     },
   },
-  specifiers: {
-    foo: '1.0.0',
-  },
 }
 
 test('fails when specifiers differ', t => {
   t.throws(() => {
     mergeLockfile({
       base: simpleLockfile,
-      ours: {...simpleLockfile, specifiers: {foo: '^1.0.0'}},
-      theirs: {...simpleLockfile, specifiers: {foo: '^1.1.0'}},
+      ours: {
+        ...simpleLockfile,
+        importers: {
+          '.': {
+            ...simpleLockfile.importers['.'],
+            specifiers: { foo: '^1.0.0' },
+          },
+        },
+      },
+      theirs: {
+        ...simpleLockfile,
+        importers: {
+          '.': {
+            ...simpleLockfile.importers['.'],
+            specifiers: { foo: '^1.1.0' },
+          },
+        },
+      },
     })
   }, /Cannot resolve 'specifiers.foo'/, 'Cannot merge specifiers field')
   t.end()
@@ -31,20 +51,36 @@ test('fails when specifiers differ', t => {
 
 test('fails when dependencies differ', t => {
   t.throws(() => {
-    mergeShrinkwraps({
-      base: simpleShr,
-      ours: {...simpleShr, dependencies: {foo: '1.2.0'}},
-      theirs: {...simpleShr, dependencies: {foo: '1.1.0'}},
+    mergeLockfile({
+      base: simpleLockfile,
+      ours: {
+        ...simpleLockfile,
+        importers: {
+          '.': {
+            ...simpleLockfile.importers['.'],
+            dependencies: { foo: '^1.0.0' },
+          },
+        },
+      },
+      theirs: {
+        ...simpleLockfile,
+        importers: {
+          '.': {
+            ...simpleLockfile.importers['.'],
+            dependencies: { foo: '^1.1.0' },
+          },
+        },
+      },
     })
   }, /Cannot resolve 'dependencies.foo'/, 'Cannot merge dependencies field')
   t.end()
 })
 
 test('prefers our shrinkwrap resolutions when it has less packages', t => {
-  const mergedShrinkwrap = mergeShrinkwraps({
-    base: simpleShr,
+  const mergedShrinkwrap = mergeLockfile({
+    base: simpleLockfile,
     ours: {
-      ...simpleShr,
+      ...simpleLockfile,
       packages: {
         '/foo/1.0.0': {
           dependencies: {
@@ -62,7 +98,7 @@ test('prefers our shrinkwrap resolutions when it has less packages', t => {
       },
     },
     theirs: {
-      ...simpleShr,
+      ...simpleLockfile,
       packages: {
         '/foo/1.0.0': {
           dependencies: {
@@ -90,7 +126,7 @@ test('prefers our shrinkwrap resolutions when it has less packages', t => {
   })
 
   t.deepEqual(mergedShrinkwrap, {
-    ...simpleShr,
+    ...simpleLockfile,
     packages: {
       '/foo/1.0.0': {
         dev: false,
@@ -114,10 +150,10 @@ test('prefers our shrinkwrap resolutions when it has less packages', t => {
 })
 
 test('prefers our shrinkwrap resolutions when it has less packages', t => {
-  const mergedShrinkwrap = mergeShrinkwraps({
-    base: simpleShr,
+  const mergedShrinkwrap = mergeLockfile({
+    base: simpleLockfile,
     theirs: {
-      ...simpleShr,
+      ...simpleLockfile,
       packages: {
         '/foo/1.0.0': {
           dependencies: {
@@ -135,7 +171,7 @@ test('prefers our shrinkwrap resolutions when it has less packages', t => {
       },
     },
     ours: {
-      ...simpleShr,
+      ...simpleLockfile,
       packages: {
         '/foo/1.0.0': {
           dependencies: {
@@ -163,7 +199,7 @@ test('prefers our shrinkwrap resolutions when it has less packages', t => {
   })
 
   t.deepEqual(mergedShrinkwrap, {
-    ...simpleShr,
+    ...simpleLockfile,
     packages: {
       '/foo/1.0.0': {
         dev: false,
