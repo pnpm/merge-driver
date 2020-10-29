@@ -1,40 +1,48 @@
-import {
-  prune,
-  ResolvedDependencies,
-  Shrinkwrap,
-} from 'pnpm-shrinkwrap'
+import { pruneSharedLockfile, Lockfile } from '@pnpm/prune-lockfile'
 import R = require('ramda')
 
-export default function mergeShrinkwrap (
+export default function mergeLockfile (
   opts: {
-    base: Shrinkwrap,
-    ours: Shrinkwrap,
-    theirs: Shrinkwrap,
+    base: Lockfile
+    ours: Lockfile
+    theirs: Lockfile
   },
 ) {
-  const newShr = {
-    specifiers: {},
-  } as Shrinkwrap
+  const newLockfile: Lockfile = {
+    importers: {},
+    lockfileVersion: Math.max(opts.base.lockfileVersion, opts.ours.lockfileVersion),
+  }
 
-  newShr.registry = takeChangedValue(opts.ours.registry, opts.base.registry, opts.theirs.registry, 'registry')
-
-  for (const key of ['specifiers', 'dependencies', 'devDependencies', 'optionalDependencies']) {
-    newShr[key] = mergeDict(opts.ours[key], opts.base[key], opts.theirs[key], key)
+  for (const importerId of Array.from(new Set([...Object.keys(opts.ours.importers), ...Object.keys(opts.theirs.importers)]))) {
+    newLockfile.importers[importerId] = {
+      specifiers: {},
+    }
+    for (const key of ['specifiers', 'dependencies', 'devDependencies', 'optionalDependencies']) {
+      newLockfile.importers[importerId][key] = mergeDict(
+        opts.ours.importers[importerId]?.[key] ?? {},
+        opts.base.importers[importerId]?.[key] ?? {},
+        opts.theirs.importers[importerId]?.[key] ?? {},
+        key
+      )
+      if (!Object.keys(newLockfile.importers[importerId][key]).length) {
+        delete newLockfile.importers[importerId][key]
+      }
+    }
   }
 
   if (R.keys(opts.ours.packages).length >= R.keys(opts.theirs.packages).length) {
-    newShr.packages = {
+    newLockfile.packages = {
       ...opts.ours.packages,
       ...opts.theirs.packages,
     }
   } else {
-    newShr.packages = {
+    newLockfile.packages = {
       ...opts.theirs.packages,
       ...opts.ours.packages,
     }
   }
 
-  return prune(newShr)
+  return pruneSharedLockfile(newLockfile)
 }
 
 interface Dict {[key: string]: string}
