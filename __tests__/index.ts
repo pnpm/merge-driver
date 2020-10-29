@@ -73,8 +73,8 @@ test('fails when dependencies differ', () => {
   }).toThrowError(/Cannot resolve 'dependencies.foo'/)
 })
 
-test('prefers our shrinkwrap resolutions when it has less packages', () => {
-  const mergedShrinkwrap = mergeLockfile({
+test('prefers our lockfile resolutions when it has less packages', () => {
+  const mergedLockfile = mergeLockfile({
     base: simpleLockfile,
     ours: {
       ...simpleLockfile,
@@ -122,7 +122,7 @@ test('prefers our shrinkwrap resolutions when it has less packages', () => {
     },
   })
 
-  expect(mergedShrinkwrap).toStrictEqual({
+  expect(mergedLockfile).toStrictEqual({
     ...simpleLockfile,
     packages: {
       '/foo/1.0.0': {
@@ -144,8 +144,8 @@ test('prefers our shrinkwrap resolutions when it has less packages', () => {
   })
 })
 
-test('prefers our shrinkwrap resolutions when it has less packages', () => {
-  const mergedShrinkwrap = mergeLockfile({
+test('prefers our lockfile resolutions when it has less packages', () => {
+  const mergedLockfile = mergeLockfile({
     base: simpleLockfile,
     theirs: {
       ...simpleLockfile,
@@ -193,7 +193,7 @@ test('prefers our shrinkwrap resolutions when it has less packages', () => {
     },
   })
 
-  expect(mergedShrinkwrap).toStrictEqual({
+  expect(mergedLockfile).toStrictEqual({
     ...simpleLockfile,
     packages: {
       '/foo/1.0.0': {
