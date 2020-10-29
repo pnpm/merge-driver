@@ -1,7 +1,7 @@
 {
   "name": "@pnpm/merge-driver",
   "version": "0.1.0",
-  "description": "A merge driver for shrinkwrap.yaml",
+  "description": "A merge driver for pnpm-lock.yaml",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "bin": {
@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/pnpm/merge-driver#readme",
   "dependencies": {
+    "@pnpm/exec": "^2.0.0",
     "@pnpm/lockfile-file": "^3.0.15",
     "@pnpm/logger": "^3.0.0",
     "@pnpm/prune-lockfile": "^2.0.15",

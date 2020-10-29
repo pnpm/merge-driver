@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import pnpmExec from '@pnpm/exec'
 import { readWantedLockfile, writeWantedLockfile } from '@pnpm/lockfile-file'
 import mergeLockfile from '.'
 
@@ -10,4 +11,5 @@ import mergeLockfile from '.'
   })
 
   await writeWantedLockfile(process.cwd(), mergedLockfile)
+  await pnpmExec(['install', '--lockfile-only', '--depth=Infinity'])
 })()

@@ -1,4 +1,5 @@
 dependencies:
+  '@pnpm/exec': 2.0.0
   '@pnpm/lockfile-file': 3.0.15_@pnpm+logger@3.1.0
   '@pnpm/logger': 3.1.0
   '@pnpm/prune-lockfile': 2.0.15
@@ -536,6 +537,16 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-1zLmh6tRftQXfZ1IFHq1IexP0KaJhN6pSCA/IzK+Vixn4hPvxwcIbGjKW0KH9hsHSmrPpmSit2EWj7jGNgfa6Q==
+  /@pnpm/exec/2.0.0:
+    dependencies:
+      '@pnpm/self-installer': 2.1.0
+      command-exists: 1.2.9
+      cross-spawn: 7.0.3
+    dev: false
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-b5ALfWEOFQprWKntN7MF8XWCyslBk2c8u20GEDcDDQOs6c0HyHlWxX5lig8riQKdS000U6YyS4L4b32NOleXAQ==
   /@pnpm/lockfile-file/3.0.15_@pnpm+logger@3.1.0:
     dependencies:
       '@pnpm/constants': 4.1.0
@@ -590,6 +601,13 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-AgE3bPlVZxD4kmt7sjTrDlkA8jdtPk4WwW6pJROrW1sK69W6s8kvILbq+urngz5ya73D+i3yuFVQVjTqSINzcQ==
+  /@pnpm/self-installer/2.1.0:
+    dev: false
+    engines:
+      node: '>=4'
+    hasBin: true
+    resolution:
+      integrity: sha512-bfMgLFmg33kY1XBPBgdkbpld6fSeyt6iAlXbIMioArHd1t58EAMFmM2cYZQt4I2MguUpLRDlZwOpYYmirDHhsg==
   /@pnpm/types/6.3.0:
     dev: false
     engines:
@@ -1274,6 +1292,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-PM54PkseWbiiD/mMsbvW351/u+dafwTJ0ye2qB60G1aGQP9j3xK2gmMDc+R34L3nDtx4qMCitXT75mkbkGJDLw==
+  /command-exists/1.2.9:
+    dev: false
+    resolution:
+      integrity: sha512-LTQ/SGc+s0Xc0Fu5WaKnR0YiygZkm9eKFvyS+fRsU7/ZWFF8ykFM6Pc9aCVf1+xasOOZpO3BAVgVrKvsqKHV7w==
   /commander/2.20.3:
     dev: true
     resolution:
@@ -1327,7 +1349,6 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
-    dev: true
     engines:
       node: '>= 8'
     resolution:
@@ -2275,7 +2296,6 @@ packages:
     resolution:
       integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=
   /isexe/2.0.0:
-    dev: true
     resolution:
       integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
   /isobject/2.1.0:
@@ -3515,7 +3535,6 @@ packages:
     resolution:
       integrity: sha1-QRyttXTFoUDTpLGRDUDYDMn0C0A=
   /path-key/3.1.1:
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -3990,7 +4009,6 @@ packages:
   /shebang-command/2.0.0:
     dependencies:
       shebang-regex: 3.0.0
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -4002,7 +4020,6 @@ packages:
     resolution:
       integrity: sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
   /shebang-regex/3.0.0:
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -4726,7 +4743,6 @@ packages:
   /which/2.0.2:
     dependencies:
       isexe: 2.0.0
-    dev: true
     engines:
       node: '>= 8'
     hasBin: true
@@ -4861,6 +4877,7 @@ packages:
     resolution:
       integrity: sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==
 specifiers:
+  '@pnpm/exec': ^2.0.0
   '@pnpm/lockfile-file': ^3.0.15
   '@pnpm/logger': ^3.0.0
   '@pnpm/prune-lockfile': ^2.0.15
