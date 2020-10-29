@@ -24,6 +24,9 @@ export default function mergeLockfile (
         opts.theirs.importers[importerId]?.[key] ?? {},
         key
       )
+      if (!Object.keys(newLockfile.importers[importerId][key]).length) {
+        delete newLockfile.importers[importerId][key]
+      }
     }
   }
 
