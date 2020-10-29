@@ -1,4 +1,3 @@
-import test = require('tape')
 import mergeLockfile from '@pnpm/merge-driver'
 
 const simpleLockfile = {
@@ -22,8 +21,8 @@ const simpleLockfile = {
   },
 }
 
-test('fails when specifiers differ', t => {
-  t.throws(() => {
+test('fails when specifiers differ', () => {
+  expect(() => {
     mergeLockfile({
       base: simpleLockfile,
       ours: {
@@ -45,12 +44,11 @@ test('fails when specifiers differ', t => {
         },
       },
     })
-  }, /Cannot resolve 'specifiers.foo'/, 'Cannot merge specifiers field')
-  t.end()
+  }).toThrowError(/Cannot resolve 'specifiers.foo'/)
 })
 
-test('fails when dependencies differ', t => {
-  t.throws(() => {
+test('fails when dependencies differ', () => {
+  expect(() => {
     mergeLockfile({
       base: simpleLockfile,
       ours: {
@@ -72,11 +70,10 @@ test('fails when dependencies differ', t => {
         },
       },
     })
-  }, /Cannot resolve 'dependencies.foo'/, 'Cannot merge dependencies field')
-  t.end()
+  }).toThrowError(/Cannot resolve 'dependencies.foo'/)
 })
 
-test('prefers our shrinkwrap resolutions when it has less packages', t => {
+test('prefers our shrinkwrap resolutions when it has less packages', () => {
   const mergedShrinkwrap = mergeLockfile({
     base: simpleLockfile,
     ours: {
@@ -125,7 +122,7 @@ test('prefers our shrinkwrap resolutions when it has less packages', t => {
     },
   })
 
-  t.deepEqual(mergedShrinkwrap, {
+  expect(mergedShrinkwrap).toStrictEqual({
     ...simpleLockfile,
     packages: {
       '/foo/1.0.0': {
@@ -145,11 +142,9 @@ test('prefers our shrinkwrap resolutions when it has less packages', t => {
       },
     },
   })
-
-  t.end()
 })
 
-test('prefers our shrinkwrap resolutions when it has less packages', t => {
+test('prefers our shrinkwrap resolutions when it has less packages', () => {
   const mergedShrinkwrap = mergeLockfile({
     base: simpleLockfile,
     theirs: {
@@ -198,7 +193,7 @@ test('prefers our shrinkwrap resolutions when it has less packages', t => {
     },
   })
 
-  t.deepEqual(mergedShrinkwrap, {
+  expect(mergedShrinkwrap).toStrictEqual({
     ...simpleLockfile,
     packages: {
       '/foo/1.0.0': {
@@ -218,6 +213,4 @@ test('prefers our shrinkwrap resolutions when it has less packages', t => {
       },
     },
   })
-
-  t.end()
 })
