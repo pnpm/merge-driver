@@ -12,5 +12,5 @@ import mergeLockfile from '.'
   })
 
   await writeWantedLockfile(process.cwd(), mergedLockfile)
-  await pnpmExec(['install', '--lockfile-only', '--depth=Infinity'])
+  await pnpmExec(['install', '--lockfile-only', '--config.depth=Infinity', '--ignore-scripts'])
 })()
