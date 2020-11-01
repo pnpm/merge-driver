@@ -15,10 +15,9 @@
   },
   "scripts": {
     "lint": "tslint -c tslint.json --project .",
-    "tsc": "rimraf lib && tsc",
-    "test": "rimraf .store && npm run lint && preview && jest",
-    "md": "mos",
-    "prepublishOnly": "npm run tsc"
+    "build": "rimraf lib && tsc",
+    "test": "rimraf .store && pnpm lint && jest",
+    "prepublishOnly": "pnpm build"
   },
   "repository": {
     "type": "git",
@@ -49,7 +48,6 @@
     "@types/semver": "^7.3.4",
     "@types/tape": "^4.13.0",
     "jest": "^26.6.1",
-    "package-preview": "^3.0.0",
     "rimraf": "^3.0.2",
     "tempy": "^1.0.0",
     "ts-jest": "^26.4.3",

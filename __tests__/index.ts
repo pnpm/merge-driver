@@ -1,5 +1,5 @@
-import mergeLockfile from '@pnpm/merge-driver'
 import { Lockfile } from '@pnpm/prune-lockfile'
+import mergeLockfile from '../src'
 
 const simpleLockfile = {
   importers: {
