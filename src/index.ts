@@ -1,4 +1,7 @@
-import { pruneSharedLockfile, Lockfile } from '@pnpm/prune-lockfile'
+import {
+  Lockfile,
+  pruneSharedLockfile,
+} from '@pnpm/prune-lockfile'
 import R = require('ramda')
 
 export default function mergeLockfile (
@@ -6,7 +9,7 @@ export default function mergeLockfile (
     base: Lockfile
     ours: Lockfile
     theirs: Lockfile
-  },
+  }
 ) {
   const newLockfile: Lockfile = {
     importers: {},
