@@ -4,8 +4,10 @@ dependencies:
   '@pnpm/logger': 3.2.2
   '@pnpm/prune-lockfile': 2.0.17
   ramda: 0.27.1
+  semver: 7.3.2
 devDependencies:
   '@types/ramda': 0.27.32
+  '@types/semver': 7.3.4
   '@types/tape': 4.13.0
   jest: 26.6.1
   package-preview: 3.0.0
@@ -727,6 +729,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-vdwZcWC+hlTxB//LZQLS1+VEdArImGI4yVKUpeqB8b9mBXgDFXCuQoOt8spQbi8fTyNLOdqRv6liSm2ckxWLog==
+  /@types/semver/7.3.4:
+    dev: true
+    resolution:
+      integrity: sha512-+nVsLKlcUCeMzD2ufHEYuJ9a2ovstb6Dp52A5VsoKxDXgvE051XgHI/33I1EymwkRGQkwnA0LkhnUzituGs4EQ==
   /@types/ssri/6.0.3:
     dependencies:
       '@types/node': 14.14.6
@@ -4991,11 +4997,13 @@ specifiers:
   '@pnpm/logger': ^3.2.2
   '@pnpm/prune-lockfile': ^2.0.17
   '@types/ramda': ^0.27.32
+  '@types/semver': ^7.3.4
   '@types/tape': ^4.13.0
   jest: ^26.6.1
   package-preview: ^3.0.0
   ramda: ^0.27.1
   rimraf: ^3.0.2
+  semver: ^7.3.2
   tempy: ^1.0.0
   ts-jest: ^26.4.3
   tslint: ^6.1.3

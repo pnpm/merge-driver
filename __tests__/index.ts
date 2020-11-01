@@ -1,4 +1,5 @@
 import mergeLockfile from '@pnpm/merge-driver'
+import { Lockfile } from '@pnpm/prune-lockfile'
 
 const simpleLockfile = {
   importers: {
@@ -47,33 +48,102 @@ test('fails when specifiers differ', () => {
   }).toThrowError(/Cannot resolve 'specifiers.foo'/)
 })
 
-test('fails when dependencies differ', () => {
-  expect(() => {
-    mergeLockfile({
-      base: simpleLockfile,
-      ours: {
-        ...simpleLockfile,
-        importers: {
-          '.': {
-            ...simpleLockfile.importers['.'],
-            dependencies: { foo: '^1.0.0' },
+test('picks the newer version when dependencies differ inside importer', () => {
+  const mergedLockfile = mergeLockfile({
+    base: simpleLockfile,
+    ours: {
+      ...simpleLockfile,
+      importers: {
+        '.': {
+          ...simpleLockfile.importers['.'],
+          dependencies: {
+            foo: '1.2.0',
+            bar: '3.0.0_qar@1.0.0',
+            zoo: '4.0.0_qar@1.0.0',
           },
         },
       },
-      theirs: {
-        ...simpleLockfile,
-        importers: {
-          '.': {
-            ...simpleLockfile.importers['.'],
-            dependencies: { foo: '^1.1.0' },
+    },
+    theirs: {
+      ...simpleLockfile,
+      importers: {
+        '.': {
+          ...simpleLockfile.importers['.'],
+          dependencies: {
+            foo: '1.1.0',
+            bar: '4.0.0_qar@1.0.0',
+            zoo: '3.0.0_qar@1.0.0',
           },
         },
       },
-    })
-  }).toThrowError(/Cannot resolve 'dependencies.foo'/)
+    },
+  })
+  expect(mergedLockfile.importers['.'].dependencies?.foo).toBe('1.2.0')
+  expect(mergedLockfile.importers['.'].dependencies?.bar).toBe('4.0.0_qar@1.0.0')
+  expect(mergedLockfile.importers['.'].dependencies?.zoo).toBe('4.0.0_qar@1.0.0')
 })
 
-test('prefers our lockfile resolutions when it has less packages', () => {
+test('picks the newer version when dependencies differ inside package', () => {
+  const base: Lockfile = {
+    importers: {
+      '.': {
+        dependencies: {
+          a: '1.0.0',
+        },
+        specifiers: {},
+      },
+    },
+    lockfileVersion: 5.2,
+    packages: {
+      '/a/1.0.0': {
+        dependencies: {
+          foo: '1.0.0',
+        },
+        resolution: {
+          integrity: '',
+        },
+      },
+    },
+  }
+  const mergedLockfile = mergeLockfile({
+    base,
+    ours: {
+      ...base,
+      packages: {
+        '/a/1.0.0': {
+          dependencies: {
+            foo: '1.2.0',
+            bar: '3.0.0_qar@1.0.0',
+            zoo: '4.0.0_qar@1.0.0',
+          },
+          resolution: {
+            integrity: '',
+          },
+        },
+      },
+    },
+    theirs: {
+      ...base,
+      packages: {
+        '/a/1.0.0': {
+          dependencies: {
+            foo: '1.1.0',
+            bar: '4.0.0_qar@1.0.0',
+            zoo: '3.0.0_qar@1.0.0',
+          },
+          resolution: {
+            integrity: '',
+          },
+        },
+      },
+    },
+  })
+  expect(mergedLockfile.packages?.['/a/1.0.0'].dependencies?.foo).toBe('1.2.0')
+  expect(mergedLockfile.packages?.['/a/1.0.0'].dependencies?.bar).toBe('4.0.0_qar@1.0.0')
+  expect(mergedLockfile.packages?.['/a/1.0.0'].dependencies?.zoo).toBe('4.0.0_qar@1.0.0')
+})
+
+test('prefers our lockfile resolutions when it has newer packages', () => {
   const mergedLockfile = mergeLockfile({
     base: simpleLockfile,
     ours: {
@@ -128,13 +198,22 @@ test('prefers our lockfile resolutions when it has less packages', () => {
       '/foo/1.0.0': {
         dev: false,
         dependencies: {
-          bar: '1.0.0',
+          bar: '1.1.0',
         },
         resolution: {
           integrity: 'sha512-aBVzCAzfyApU0gg36QgCpJixGtYwuQ4djrn11J+DTB5vE4OmBPuZiulgTCA9ByULgVAyNV2CTpjjvZmxzukSLw==',
         },
       },
-      '/bar/1.0.0': {
+      '/bar/1.1.0': {
+        dependencies: {
+          qar: '1.0.0',
+        },
+        dev: false,
+        resolution: {
+          integrity: 'sha512-aBVzCAzfyApU0gg36QgCpJixGtYwuQ4djrn11J+DTB5vE4OmBPuZiulgTCA9ByULgVAyNV2CTpjjvZmxzukSLw==',
+        },
+      },
+      '/qar/1.0.0': {
         dev: false,
         resolution: {
           integrity: 'sha512-aBVzCAzfyApU0gg36QgCpJixGtYwuQ4djrn11J+DTB5vE4OmBPuZiulgTCA9ByULgVAyNV2CTpjjvZmxzukSLw==',
@@ -144,7 +223,7 @@ test('prefers our lockfile resolutions when it has less packages', () => {
   })
 })
 
-test('prefers our lockfile resolutions when it has less packages', () => {
+test('prefers our lockfile resolutions when it has newer packages', () => {
   const mergedLockfile = mergeLockfile({
     base: simpleLockfile,
     theirs: {
@@ -197,15 +276,24 @@ test('prefers our lockfile resolutions when it has less packages', () => {
     ...simpleLockfile,
     packages: {
       '/foo/1.0.0': {
-        dev: false,
         dependencies: {
-          bar: '1.0.0',
+          bar: '1.1.0',
         },
+        dev: false,
         resolution: {
           integrity: 'sha512-aBVzCAzfyApU0gg36QgCpJixGtYwuQ4djrn11J+DTB5vE4OmBPuZiulgTCA9ByULgVAyNV2CTpjjvZmxzukSLw==',
         },
       },
-      '/bar/1.0.0': {
+      '/bar/1.1.0': {
+        dependencies: {
+          qar: '1.0.0',
+        },
+        dev: false,
+        resolution: {
+          integrity: 'sha512-aBVzCAzfyApU0gg36QgCpJixGtYwuQ4djrn11J+DTB5vE4OmBPuZiulgTCA9ByULgVAyNV2CTpjjvZmxzukSLw==',
+        },
+      },
+      '/qar/1.0.0': {
         dev: false,
         resolution: {
           integrity: 'sha512-aBVzCAzfyApU0gg36QgCpJixGtYwuQ4djrn11J+DTB5vE4OmBPuZiulgTCA9ByULgVAyNV2CTpjjvZmxzukSLw==',
