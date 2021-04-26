@@ -39,7 +39,7 @@
     "@pnpm/exec": "^2.0.0",
     "@pnpm/lockfile-file": "^3.0.17",
     "@pnpm/logger": "^3.2.2",
-    "@pnpm/prune-lockfile": "^2.0.17",
+    "@pnpm/prune-lockfile": "^3.0.0",
     "ramda": "^0.27.1",
     "semver": "^7.3.2"
   },
