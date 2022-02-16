@@ -8,8 +8,16 @@
 
 ## Installation
 
+Globally ( recommended )
+
 ```sh
-pnpm add @pnpm/merge-driver
+pnpm add -g @pnpm/merge-driver
+```
+
+Locally in a repository ( this will not help you if you need to do a rebase/merge right now ! )
+
+```sh
+pnpm add -D @pnpm/merge-driver
 ```
 
 ## Usage
