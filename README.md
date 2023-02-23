@@ -26,7 +26,7 @@ To configure it on a repo, run:
 
 ```sh
 pnpm add -g @pnpm/merge-driver
-pnpx npm-merge-driver install --driver-name pnpm-merge-driver --driver "pnpm-merge-driver %A %O %B %P" --files pnpm-lock.yaml
+pnpm dlx npm-merge-driver install --driver-name pnpm-merge-driver --driver "pnpm-merge-driver %A %O %B %P" --files pnpm-lock.yaml
 ```
 
 ## License
