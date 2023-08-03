@@ -1002,7 +1002,7 @@ packages:
     dev: true
 
   /balanced-match@1.0.0:
-    resolution: {integrity: sha1-ibTRmasr7kneFk6gK4nORi1xt2c=}
+    resolution: {integrity: sha512-9Y0g0Q8rmSt+H33DfKv7FOc3v+iRI+o1lbzt8jGcIosYW37IIW/2XVYq5NPdmaD5NQ59Nk26Kl/vZbwW9Fr8vg==}
 
   /base@0.11.2:
     resolution: {integrity: sha512-5T6P4xPgpp0YDFvSWwEZ4NoE3aM4QBQXDzmVbraCkFj8zHM+mba8SyqB5DbZWyR7mYHo6Y7BdQo3MoA4m0TeQg==}
@@ -1239,7 +1239,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   /convert-source-map@1.7.0:
     resolution: {integrity: sha512-4FJkXzKXEDB1snCFZlLP4gpC3JILicCpGbzG9f9G7tGqGCzETQ2hWPrcinA9oU4wtf2biUaEH5065UnMeR33oA==}
@@ -1776,7 +1776,7 @@ packages:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.4
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
 
@@ -2879,8 +2879,8 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /minimatch@3.0.4:
-    resolution: {integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==}
+  /minimatch@3.1.2:
+    resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
       brace-expansion: 1.1.11
 
@@ -3783,7 +3783,7 @@ packages:
     dependencies:
       '@istanbuljs/schema': 0.1.2
       glob: 7.1.6
-      minimatch: 3.0.4
+      minimatch: 3.1.2
     dev: true
 
   /thenify-all@1.6.0:
@@ -3922,7 +3922,7 @@ packages:
       diff: 4.0.2
       glob: 7.1.6
       js-yaml: 3.14.0
-      minimatch: 3.0.4
+      minimatch: 3.1.2
       mkdirp: 0.5.5
       resolve: 1.18.1
       semver: 5.7.1
