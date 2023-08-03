@@ -2664,7 +2664,7 @@ packages:
       whatwg-encoding: 1.0.5
       whatwg-mimetype: 2.3.0
       whatwg-url: 8.4.0
-      ws: 7.3.1
+      ws: 7.5.9
       xml-name-validator: 3.0.0
     transitivePeerDependencies:
       - bufferutil
@@ -4187,8 +4187,8 @@ packages:
       write-file-atomic: 3.0.3
     dev: true
 
-  /ws@7.3.1:
-    resolution: {integrity: sha512-D3RuNkynyHmEJIpD2qrgVkc9DQ23OrN/moAwZX4L8DfvszsJxpjQuUq3LMx6HoYji9fbIOBY18XWBsAux1ZZUA==}
+  /ws@7.5.9:
+    resolution: {integrity: sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==}
     engines: {node: '>=8.3.0'}
     peerDependencies:
       bufferutil: ^4.0.1
